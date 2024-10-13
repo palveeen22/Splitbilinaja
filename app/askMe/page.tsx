@@ -12,8 +12,6 @@ import { TiDeleteOutline } from "react-icons/ti";
 const ChatRoom = () => {
   const { selectedFile, deleteSelectedFile, messages } = useMessage()
 
-
-
   return (
     <div className="flex flex-col h-screen bg-zinc-800 text-white">
       <div className="flex-1 overflow-y-auto p-4">
