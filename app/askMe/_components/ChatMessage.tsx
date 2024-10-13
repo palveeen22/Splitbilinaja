@@ -2,7 +2,7 @@ import React from 'react';
 
 type TProps = {
     message:string,
-    isUser: boolean
+    isUser?: boolean
 }
 
 const ChatMessage = ({ message, isUser }: TProps) => (
