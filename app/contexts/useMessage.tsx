@@ -75,7 +75,7 @@ export const MessageProvider = ({ children }: TProps) => {
   
       try {
         // Call Gemini AI API
-        const response = await fetch('api/gemini/generate', {
+        const response = await fetch('api/generate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
