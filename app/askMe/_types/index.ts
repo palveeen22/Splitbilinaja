@@ -3,6 +3,7 @@ export type TMessage = {
     type: 'text' | 'file';
     content: string;
     file?: File;
+    isUser?: boolean;
 }
 
 export type TMessageContextType = {
@@ -15,5 +16,6 @@ export type TMessageContextType = {
     triggerFileInput: () => void;
     setInputMessage: React.Dispatch<React.SetStateAction<string>>;
     handleSubmit: (e: React.FormEvent) => void;
+    deleteSelectedFile: () => void
 }
 
