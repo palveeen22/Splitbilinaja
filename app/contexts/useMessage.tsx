@@ -54,7 +54,7 @@ export const MessageProvider = ({ children }: TProps) => {
   // };
 
 
-  const handleCreateMessage = async (message: string, file?: File) : Promise<void> => {
+  const handleCreateMessage = async (message: string, file?: File): Promise<void> => {
     console.log(message);
     if (file) {
       setMessages(prevMessages => [...prevMessages, {
@@ -72,7 +72,7 @@ export const MessageProvider = ({ children }: TProps) => {
         isUser: true
       }]);
       console.log('Successfully created user text message:', message);
-  
+
       try {
         // Call Gemini AI API
         const response = await fetch('api/generate', {
@@ -80,9 +80,9 @@ export const MessageProvider = ({ children }: TProps) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ body: message }),
+          body: JSON.stringify({ message }),
         })
-  
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`)
         }
@@ -90,7 +90,7 @@ export const MessageProvider = ({ children }: TProps) => {
         console.log(response, "<<<");
         // const response = await axios.post('/api/gemini/generate', { body: message });
         // const aiResponse = response.data;
-  
+
         // Add AI response
         // setMessages(prevMessages => [...prevMessages, {
         //   type: 'text',
@@ -98,6 +98,18 @@ export const MessageProvider = ({ children }: TProps) => {
         //   isUser: false
         // }]);
         // console.log('Successfully created AI response message:', aiResponse);
+        const data = await response.json();
+        console.log('API Response:', data);
+
+        if (data.code === 200 && data.data) {
+          // Add AI response
+          setMessages(prevMessages => [...prevMessages, {
+            type: 'text',
+            content: data.data,
+            isUser: false
+          }]);
+          console.log('Successfully created AI response message:', data.data);
+        }
       } catch (error) {
         console.error('Error getting AI response:', error);
         // Optionally, add an error message to the chat
